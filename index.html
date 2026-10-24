@@ -50,6 +50,13 @@
     <symbol id="d-saturn" viewBox="0 0 130 80"><circle cx="62" cy="40" r="22"/><ellipse cx="62" cy="40" rx="56" ry="13" transform="rotate(-14 62 40)"/><circle cx="118" cy="12" r="4"/></symbol>
     <symbol id="d-tube" viewBox="0 0 40 120"><path d="M8 6h24M12 6v88a8 8 0 0 0 16 0V6M12 62h16"/><circle cx="18" cy="80" r="2.5"/><circle cx="23" cy="92" r="2"/></symbol>
     <symbol id="d-pendulum" viewBox="0 0 100 110"><path d="M8 8h84M50 8l22 72M50 8v78" /><circle cx="74" cy="86" r="8"/><path d="M26 86c14 8 34 9 48 2" stroke-dasharray="2 4"/><path d="M50 30c4 0 8-1 11-3"/></symbol>
+    <symbol id="d-magnet" viewBox="0 0 100 100"><path d="M22 20v34a28 28 0 0 0 56 0V20H60v34a10 10 0 0 1-20 0V20zM22 34h18M60 34h18"/><path d="M84 66l8 4M86 54h9M16 66l-8 4M14 54H5" stroke-dasharray="2 3"/></symbol>
+    <symbol id="d-bulb" viewBox="0 0 80 110"><path d="M40 8a28 28 0 0 0-16 51c4 3 6 8 6 12v6h20v-6c0-4 2-9 6-12A28 28 0 0 0 40 8zM30 86h20M33 95h14M34 77l6-22 6 22"/><path d="M6 38H0M80 38h-6M14 12l-5-5M66 12l5-5" stroke-dasharray="2 3"/></symbol>
+    <symbol id="d-beaker" viewBox="0 0 90 100"><path d="M14 8h62M20 8v76a8 8 0 0 0 8 8h34a8 8 0 0 0 8-8V8M20 50c10-4 18 4 26 0s16-4 24 0M58 22h12M62 34h8M58 46h12"/><circle cx="34" cy="68" r="3"/><circle cx="48" cy="76" r="2.5"/></symbol>
+    <symbol id="d-prism" viewBox="0 0 130 90"><path d="M50 10l30 62H20zM0 46l40 4M62 48l64-18M64 52l62-6M64 56l62 8M62 60l64 20"/></symbol>
+    <symbol id="d-rocket" viewBox="0 0 80 120"><path d="M40 6c14 12 20 30 20 52v26H20V58c0-22 6-40 20-52zM20 70L8 88v8l12-6M60 70l12 18v8l-12-6M32 84l-4 18M40 84v24M48 84l4 18"/><circle cx="40" cy="44" r="7"/></symbol>
+    <symbol id="d-bacteria" viewBox="0 0 120 70"><rect x="18" y="16" width="84" height="38" rx="19"/><path d="M18 35H4M102 35h14M30 16l-6-10M50 16l-2-12M70 16l2-12M90 16l6-10M30 54l-6 10M50 54l-2 12M70 54l2 12M90 54l6 10"/><circle cx="46" cy="32" r="4"/><circle cx="70" cy="40" r="3"/></symbol>
+    <symbol id="d-magnifier" viewBox="0 0 100 100"><circle cx="40" cy="40" r="28"/><path d="M60 60l30 30M26 34a16 16 0 0 1 12-12"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
     <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></symbol>
     <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></symbol>
@@ -84,7 +91,7 @@
         <li><a href="#approach">Approach</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <a class="btn btn-primary nav-cta" href="#demo">Free Demo Class</a>
+      <a class="btn btn-primary nav-cta" href="#contact" data-interest="Free live demo class">Free Demo Class</a>
     </nav>
 
     <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false">
@@ -113,7 +120,7 @@
         </h1>
         <p class="hero-lead load-in" style="--d:5">With over 20 years of teaching and mentoring, Amar Goswami helps students understand Science through clear explanations, concept-based learning and personalised guidance in Hindi and English.</p>
         <div class="btn-row load-in" style="--d:6">
-          <a class="btn btn-primary" href="#demo" data-magnetic>Join a Free Live Demo <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-primary" href="#contact" data-interest="Free live demo class" data-magnetic>Join a Free Live Demo <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
           <a class="btn btn-ghost" href="#courses">Explore Courses</a>
         </div>
       </div>
@@ -249,7 +256,7 @@
             <li>Plant Biology and Ecology</li>
             <li>Revision, practice questions and doubt-solving</li>
           </ul>
-          <a class="text-link" href="#contact" data-interest="Biology classes">Enquire <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="text-link" href="#contact" data-interest="Biology classes">Enquire about Biology <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </article>
 
         <article class="card course-card" data-reveal>
@@ -284,16 +291,53 @@
             <li>Biology concepts and diagrams</li>
             <li>Chapter-wise practice and exam preparation</li>
           </ul>
-          <a class="text-link" href="#contact" data-interest="Full Science classes">Enquire <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="text-link" href="#contact" data-interest="Full Science classes">Enquire about Full Science <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </article>
       </div>
 
-      <div class="card other-subjects" data-reveal>
-        <div>
-          <h3>Other subjects</h3>
-          <p>Beyond Science, other subjects can be discussed based on the student’s class and level.</p>
+      <div class="card custom-course" data-reveal>
+        <div class="custom-head">
+          <span class="tag">Customisable</span>
+          <h3>Build your own course</h3>
+          <p>Choose the subjects, class and focus. Beyond Science, other subjects can be discussed based on the student’s level.</p>
         </div>
-        <a class="btn btn-ghost" href="#contact" data-interest="Other subjects">Ask by email <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+
+        <form class="custom-form" id="custom-course" novalidate>
+          <fieldset>
+            <legend>Subjects</legend>
+            <div class="chip-group">
+              <label class="chip"><input type="checkbox" name="subject" value="Biology"><span>Biology</span></label>
+              <label class="chip"><input type="checkbox" name="subject" value="Physics"><span>Physics</span></label>
+              <label class="chip"><input type="checkbox" name="subject" value="Chemistry"><span>Chemistry</span></label>
+              <label class="chip"><input type="checkbox" name="subject" value="Other subject"><span>Other subject</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Class</legend>
+            <div class="chip-group">
+              <label class="chip"><input type="radio" name="level" value="Class 6 to 8"><span>6 to 8</span></label>
+              <label class="chip"><input type="radio" name="level" value="Class 9 to 10"><span>9 to 10</span></label>
+              <label class="chip"><input type="radio" name="level" value="Class 11"><span>11</span></label>
+              <label class="chip"><input type="radio" name="level" value="Class 12"><span>12</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Focus</legend>
+            <div class="chip-group">
+              <label class="chip"><input type="checkbox" name="focus" value="Full syllabus"><span>Full syllabus</span></label>
+              <label class="chip"><input type="checkbox" name="focus" value="Selected chapters"><span>Selected chapters</span></label>
+              <label class="chip"><input type="checkbox" name="focus" value="Exam revision"><span>Exam revision</span></label>
+              <label class="chip"><input type="checkbox" name="focus" value="Doubt-solving"><span>Doubt-solving</span></label>
+            </div>
+          </fieldset>
+
+          <div class="custom-foot">
+            <p class="custom-summary" aria-live="polite">Select at least one subject.</p>
+            <button class="btn btn-primary" type="submit">Request this course <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          </div>
+        </form>
       </div>
     </div>
   </section>
@@ -352,7 +396,7 @@
               </div>
             </div>
           </div>
-          <a class="text-link" href="#contact" data-batch-link>Ask about this <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="text-link" href="#contact" data-batch-link>Enquire about this batch <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </div>
 
         <div class="card format-card" data-reveal>
@@ -500,14 +544,14 @@
 
         <a class="btn btn-primary btn-block" href="#contact" data-mail data-magnetic>
           <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>
-          Write an Email
+          Send a Mail
         </a>
 
         <div class="mail-address">
           <span class="mail-text" data-email-text>shaanamar107@gmail.com</span>
           <button class="copy-btn" type="button" data-copy-email>Copy</button>
         </div>
-        <p class="mail-status" role="status" aria-live="polite"></p>
+        <p class="mail-alt">Prefer another email app? <a href="#contact" data-mailto>Open in your mail app</a></p>
       </div>
     </div>
   </section>
