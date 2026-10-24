@@ -1,11 +1,11 @@
-# Amar Goswami — prjgyanjaya.in
+# Amar Goswami
 
 Single-page portfolio for Amar Goswami, Science educator. Plain HTML/CSS/JS, no build step.
 
 ```
 index.html          page content
 css/styles.css      styles
-js/main.js          symbol background, animations, email links
+js/main.js          animations, email links
 assets/             portrait + favicon
 ```
 
@@ -13,9 +13,9 @@ Run locally: `python -m http.server 5173`, then open http://localhost:5173.
 
 ## Before going live
 
-1. **Email** — set `CONFIG.email` at the top of `js/main.js`, and replace `[email]` in `index.html`.
-   Every "Email / Enquire / Book" button then opens a pre-filled email.
-2. **Placeholders** — search `index.html` for `[` and fill in: verified 99%+ metric, batch size,
-   curricula, demo duration / platform / timing, consultation format and fee, city, testimonials.
-3. **Photos** — two study photos load from Unsplash (free licence). Swap in Amar sir's own
+1. **Email**: currently shaanamar107@gmail.com. To change it, edit `CONFIG.email` in `js/main.js`
+   and the address shown in `index.html`. Every "Email / Enquire / Book" button then opens a pre-filled email.
+2. **Placeholders**: search `index.html` for `[` and fill in: verified 99%+ metric, batch size,
+   curricula, demo duration / platform / timing, consultation duration and fee.
+3. **Photos**: two study photos load from Unsplash (free licence). Swap in Amar sir's own
    classroom photos when available.

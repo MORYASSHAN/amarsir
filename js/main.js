@@ -1,144 +1,15 @@
-/* Amar Goswami — site interactions */
+/* Amar Goswami: site interactions */
 (function () {
   'use strict';
 
   // Amar sir's email address. Every "Email" button on the page uses it.
   const CONFIG = {
-    email: '' // e.g. 'amar@prjgyanjaya.in'
+    email: 'shaanamar107@gmail.com'
   };
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const hasIO = 'IntersectionObserver' in window;
-
-  /* ------------------------------------------------------------------
-     Background: a quiet field of science symbols that lights up
-     around the cursor (and drifts on its own when idle / on touch).
-     ------------------------------------------------------------------ */
-  (function symbolField() {
-    const canvas = document.querySelector('.field-bg');
-    if (!canvas || !canvas.getContext) return;
-    const ctx = canvas.getContext('2d');
-
-    const GLYPHS = ['+', '+', '+', '−', '−', '×', '×', '÷', '=', 'Δ', 'π', 'λ', 'Σ', 'µ', '√', '∞', '°', 'α', 'β', '→', '⇌', '·', '·', '·'];
-    const CELL = 30;
-    const RADIUS = finePointer ? 260 : 200;
-    const INTENSITY = finePointer ? 0.8 : 0.5; // keep text readable on phones, where the glow drifts under copy
-    const PARALLAX = 0.18;
-    const FONT = '400 13px "Geist Mono", ui-monospace, Menlo, Consolas, monospace';
-
-    let w = 0, h = 0, dpr = 1, cols = 0, rows = 0, grid = [], base = null, shift = -1;
-    const p = { x: window.innerWidth * 0.72, y: window.innerHeight * 0.4, tx: 0, ty: 0, last: -Infinity };
-    p.tx = p.x; p.ty = p.y;
-
-    const pick = () => GLYPHS[(Math.random() * GLYPHS.length) | 0];
-
-    function drawBase() {
-      const b = base.getContext('2d');
-      b.setTransform(dpr, 0, 0, dpr, 0, 0);
-      b.clearRect(0, 0, w, h + CELL);
-      b.font = FONT;
-      b.textAlign = 'center';
-      b.textBaseline = 'middle';
-      b.fillStyle = 'rgba(255, 255, 255, 0.065)';
-      for (let r = 0; r < rows; r++) {
-        const gr = (r + shift) % rows;
-        for (let c = 0; c < cols; c++) {
-          b.fillText(grid[gr * cols + c], c * CELL + CELL / 2, r * CELL + CELL / 2);
-        }
-      }
-    }
-
-    function resize() {
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      w = window.innerWidth;
-      h = window.innerHeight;
-      canvas.width = w * dpr;
-      canvas.height = h * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      cols = Math.ceil(w / CELL) + 1;
-      rows = Math.ceil(h / CELL) + 2;
-      grid = Array.from({ length: cols * rows }, pick);
-      base = document.createElement('canvas');
-      base.width = w * dpr;
-      base.height = (h + CELL) * dpr;
-      shift = -1;
-    }
-
-    function render(t) {
-      const scrolled = window.scrollY * PARALLAX;
-      const nextShift = Math.floor(scrolled / CELL) % rows;
-      const off = scrolled % CELL;
-      if (nextShift !== shift) { shift = nextShift; drawBase(); }
-
-      // Drift on a slow path when the visitor isn't moving the mouse
-      if (t - p.last > 3500) {
-        p.tx = w * (0.55 + 0.3 * Math.sin(t * 0.00021));
-        p.ty = h * (0.45 + 0.28 * Math.sin(t * 0.00029 + 1.3));
-      }
-      p.x += (p.tx - p.x) * 0.075;
-      p.y += (p.ty - p.y) * 0.075;
-
-      ctx.clearRect(0, 0, w, h);
-
-      const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, RADIUS * 1.8);
-      glow.addColorStop(0, 'rgba(123, 224, 166, 0.10)');
-      glow.addColorStop(1, 'rgba(123, 224, 166, 0)');
-      ctx.fillStyle = glow;
-      ctx.fillRect(0, 0, w, h);
-
-      ctx.drawImage(base, 0, -off, w, h + CELL);
-
-      ctx.font = FONT;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      const c0 = Math.max(0, Math.floor((p.x - RADIUS) / CELL));
-      const c1 = Math.min(cols - 1, Math.ceil((p.x + RADIUS) / CELL));
-      const r0 = Math.max(0, Math.floor((p.y + off - RADIUS) / CELL));
-      const r1 = Math.min(rows - 1, Math.ceil((p.y + off + RADIUS) / CELL));
-      for (let r = r0; r <= r1; r++) {
-        const gr = (r + shift) % rows;
-        const cy = r * CELL + CELL / 2 - off;
-        for (let c = c0; c <= c1; c++) {
-          const cx = c * CELL + CELL / 2;
-          const d = Math.hypot(cx - p.x, cy - p.y);
-          if (d > RADIUS) continue;
-          let k = 1 - d / RADIUS;
-          k = k * k * (0.7 + 0.3 * Math.sin(d * 0.045 - t * 0.003)); // soft ripple
-          ctx.fillStyle = 'rgba(123, 224, 166, ' + (k * INTENSITY) + ')';
-          ctx.fillText(grid[gr * cols + c], cx, cy);
-        }
-      }
-    }
-
-    function loop(t) {
-      render(t);
-      requestAnimationFrame(loop);
-    }
-
-    resize();
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => { resize(); if (reduceMotion) render(0); }, 120);
-    });
-
-    if (reduceMotion) {
-      (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => render(0));
-      window.addEventListener('scroll', () => render(0), { passive: true });
-      return;
-    }
-
-    window.addEventListener('pointermove', (e) => {
-      p.tx = e.clientX;
-      p.ty = e.clientY;
-      p.last = performance.now();
-    }, { passive: true });
-
-    // Redraw the faint layer once the mono font has loaded
-    if (document.fonts) document.fonts.ready.then(() => { shift = -1; });
-    requestAnimationFrame(loop);
-  })();
 
   /* ------------------------------------------------------------------
      Header: shadow, hide on scroll down, show on scroll up + progress
@@ -229,17 +100,9 @@
   }
 
   /* ------------------------------------------------------------------
-     Cursor spotlight on cards + gentle magnetic buttons
+     Gentle magnetic buttons
      ------------------------------------------------------------------ */
   if (finePointer && !reduceMotion) {
-    document.querySelectorAll('[data-spot]').forEach((el) => {
-      el.addEventListener('pointermove', (e) => {
-        const r = el.getBoundingClientRect();
-        el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-        el.style.setProperty('--my', (e.clientY - r.top) + 'px');
-      });
-    });
-
     document.querySelectorAll('[data-magnetic]').forEach((btn) => {
       btn.addEventListener('pointermove', (e) => {
         const r = btn.getBoundingClientRect();
@@ -257,7 +120,7 @@
   const mailStatus = document.querySelector('.mail-status');
 
   function mailto(interest, batch) {
-    const subject = interest ? interest + ' — enquiry' : 'Enquiry for Amar sir';
+    const subject = interest ? 'Enquiry: ' + interest : 'Enquiry for Amar sir';
     const body = [
       'Hello Amar sir,',
       '',
@@ -275,7 +138,7 @@
 
   const notConnected = () => {
     if (!mailStatus) return;
-    mailStatus.textContent = 'The email address will be added here soon — please check back.';
+    mailStatus.textContent = 'The email address will be added here soon. Please check back later.';
   };
 
   if (CONFIG.email) {
@@ -319,6 +182,9 @@
       setTimeout(() => { copyBtn.textContent = 'Copy'; copyBtn.classList.remove('is-done'); }, 1800);
     });
   }
+
+  /* Current year in the footer */
+  document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
 
   /* Floating email button hides once the contact section is on screen */
   const mailFloat = document.querySelector('.mail-float');
